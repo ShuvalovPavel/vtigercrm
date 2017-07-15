@@ -1,0 +1,12 @@
+<?php
+
+global $adb;
+
+    $result = $adb->query("UPDATE vtiger_customerdetails 
+        INNER JOIN vtiger_crmentity ON vtiger_customerdetails.customerid = vtiger_crmentity.crmid   
+        INNER JOIN vtiger_contactdetails ON vtiger_customerdetails.customerid = vtiger_contactdetails.contactid
+        SET vtiger_customerdetails.portal=1 
+        WHERE vtiger_crmentity.deleted=0 and (SELECT DATE(createdtime) AS vtiger_crmentity) = CURRENT_DATE()
+            ");
+
+
